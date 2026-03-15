@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wolof Xam-Xam · Bilingue Avancé</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #120C04;
+  --ink2:    #1E1408;
+  --ink3:    #2C1E0F;
+  --ink4:    #3D2B17;
+  --sand:    #F5EDD8;
+  --sand2:   #EDE0C4;
+  --sand3:   #D9C9A8;
+  --mute:    #8C6E48;
+  --mute2:   #B8956A;
+  --flame:   #D94F1E;
+  --flame2:  #E8702A;
+  --amber:   #E8A020;
+  --amber2:  #F5C040;
+  --jade:    #1E7A52;
+  --jade2:   #2DA06C;
+  --sky:     #2458A0;
+  --sky2:    #3A7ACC;
+  --ruby:    #A82828;
+
+  --fl:  rgba(217,79,30,0.12);
+  --al:  rgba(232,160,32,0.12);
+  --jl:  rgba(30,122,82,0.12);
+  --sl:  rgba(36,88,160,0.12);
+
+  --brd:  rgba(217,160,80,0.15);
+  --brd2: rgba(217,160,80,0.30);
+  --brd3: rgba(217,160,80,0.55);
+
+  --r:  10px;
+  --rl: 16px;
+  --rxl:22px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Karla', sans-serif;
+  background: var(--ink);
+  color: var(--sand);
+  min-height: 100vh;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+/* ─── wax-weave background ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    repeating-linear-gradient(0deg,   rgba(217,160,80,.04) 0,rgba(217,160,80,.04) 1px, transparent 1px, transparent 24px),
+    repeating-linear-gradient(90deg,  rgba(217,160,80,.04) 0,rgba(217,160,80,.04) 1px, transparent 1px, transparent 24px),
+    radial-gradient(ellipse at 8%  5%,  rgba(217,79,30,.09) 0, transparent 45%),
+    radial-gradient(ellipse at 92% 95%, rgba(30,122,82,.08) 0, transparent 45%);
+}
+
+/* ══════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════ */
+.hdr {
+  position: sticky; top: 0; z-index: 300;
+  background: var(--ink2);
+  border-bottom: 1px solid var(--brd2);
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.75rem;
+}
+.hdr::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--flame), var(--amber), var(--jade), var(--amber), var(--flame));
+}
+.hdr-left  { display: flex; align-items: center; gap: 12px; }
+.hdr-logo  {
+  width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
+  background: linear-gradient(140deg, var(--flame), var(--amber));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800;
+  color: var(--ink); letter-spacing: -1px;
+}
+.hdr-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--sand); letter-spacing: -0.3px; }
+.hdr-title span { color: var(--amber); }
+.hdr-sub   { font-size: 10px; color: var(--mute); letter-spacing: .12em; text-transform: uppercase; margin-top: 1px; }
+.hdr-pill  {
+  font-size: 11px; padding: 5px 13px; border-radius: 20px;
+  background: var(--al); border: 1px solid rgba(232,160,32,.3);
+  color: var(--amber); letter-spacing: .07em;
+}
+
+/* ══════════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════════ */
+.layout { display: flex; min-height: calc(100vh - 64px); position: relative; z-index: 1; }
+
+/* ── sidebar ── */
+.sidebar {
+  width: 256px; min-width: 256px;
+  background: var(--ink2); border-right: 1px solid var(--brd);
+  padding: 1.25rem 0;
+  position: sticky; top: 64px; height: calc(100vh - 64px);
+  overflow-y: auto; display: flex; flex-direction: column;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--brd2); border-radius: 2px; }
+
+.sb-prog { padding: 0 1rem; margin-bottom: 1.5rem; }
+.sb-prog-card {
+  background: var(--ink3); border: 1px solid var(--brd2);
+  border-radius: var(--rl); padding: 14px;
+}
+.sb-prog-title { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin-bottom: 10px; }
+.sb-prow { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.sb-plabel { font-size: 10px; color: var(--mute); width: 48px; }
+.sb-ptrack { flex: 1; height: 3px; background: var(--brd); border-radius: 2px; overflow: hidden; }
+.sb-pfill  { height: 100%; border-radius: 2px; transition: width .5s ease; }
+.sb-pfill.gold  { background: linear-gradient(90deg, var(--flame), var(--amber)); }
+.sb-pfill.green { background: var(--jade); }
+.sb-pval   { font-size: 10px; color: var(--mute2); min-width: 34px; text-align: right; }
+
+.sb-section { padding: 0 .875rem; margin-bottom: 1.25rem; }
+.sb-label {
+  font-size: 9px; font-weight: 700; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--mute);
+  padding-left: 8px; margin-bottom: .5rem;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 10px; border-radius: var(--r);
+  cursor: pointer; font-size: 13px; color: var(--mute);
+  transition: all .15s; margin-bottom: 2px;
+  border: 1px solid transparent; position: relative;
+}
+.nav-item:hover { background: var(--ink3); color: var(--sand); }
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(217,79,30,.2), rgba(232,160,32,.08));
+  color: var(--amber); border-color: rgba(232,160,32,.22);
+}
+.nav-item.active::before {
+  content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 2px; height: 55%; background: var(--amber); border-radius: 2px;
+}
+.nav-ico { font-size: 14px; flex-shrink: 0; }
+.nav-badge {
+  margin-left: auto; font-size: 9px; padding: 2px 6px;
+  border-radius: 8px; background: var(--al); color: var(--amber);
+  font-weight: 700; letter-spacing: .04em;
+}
+.nav-badge.g { background: var(--jl); color: #5EC882; }
+
+.sb-legend { margin-top: auto; padding: 1rem; border-top: 1px solid var(--brd); }
+.sb-leg-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--mute); margin-bottom: 5px; }
+.sb-leg-dot  { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── main ── */
+.main { flex: 1; overflow-y: auto; }
+.main::-webkit-scrollbar { width: 4px; }
+.main::-webkit-scrollbar-thumb { background: var(--brd2); border-radius: 2px; }
+
+.page { display: none; padding: 2rem 2.25rem 5rem; max-width: 940px; }
+.page.active { display: block; }
+
+/* ══════════════════════════════════════════
+   PAGE HERO
+══════════════════════════════════════════ */
+.ph { margin-bottom: 2.25rem; }
+.ph-eye {
+  font-size: 10px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--flame);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.ph-eye::after { content: ''; flex: 0 0 30px; height: 1px; background: var(--flame); opacity: .5; }
+.ph-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 34px; font-weight: 800; line-height: 1.08;
+  letter-spacing: -1px; color: var(--sand); margin-bottom: .4rem;
+}
+.ph-title em { font-style: italic; color: var(--amber); font-weight: 400; font-family: 'Karla', sans-serif; }
+.ph-sub { font-size: 14px; color: var(--mute2); max-width: 580px; line-height: 1.65; }
+
+/* ══════════════════════════════════════════
+   CARDS
+══════════════════════════════════════════ */
+.card {
+  background: var(--ink2); border: 1px solid var(--brd);
+  border-radius: var(--rl); padding: 1.5rem; margin-bottom: 1rem;
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brd3), transparent);
+}
+.card-sm { padding: 1rem 1.25rem; }
+.card-title {
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px;
+  color: var(--sand); margin-bottom: .75rem;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ══════════════════════════════════════════
+   SECTION DIVIDER
+══════════════════════════════════════════ */
+.sdiv {
+  display: flex; align-items: center; gap: 10px;
+  margin: 2rem 0 1rem;
+}
+.sdiv-line { flex: 1; height: 1px; background: var(--brd); }
+.sdiv-lbl {
+  font-size: 9px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--mute);
+  padding: 4px 12px; border: 1px solid var(--brd);
+  border-radius: 20px; white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════
+   PHASE CARDS
+══════════════════════════════════════════ */
+.phase-card {
+  background: var(--ink2); border: 1px solid var(--brd);
+  border-radius: var(--rl); overflow: hidden; margin-bottom: 1.25rem;
+  transition: border-color .2s;
+}
+.phase-card:hover { border-color: var(--brd2); }
+.pc-head {
+  padding: .875rem 1.5rem;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid var(--brd);
+}
+.pc-badge { font-size: 10px; font-weight: 700; padding: 4px 11px; border-radius: 20px; letter-spacing: .06em; }
+.pc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--sand); }
+.pc-dur   { margin-left: auto; font-size: 11px; color: var(--mute); }
+.pc-body  { padding: 1.25rem 1.5rem; }
+.pc-mods  { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 1rem; }
+.mod { background: var(--ink3); border: 1px solid var(--brd); border-radius: var(--r); padding: 11px 12px; }
+.mod-name { font-weight: 600; font-size: 12px; margin-bottom: 3px; color: var(--sand); }
+.mod-desc { font-size: 11px; color: var(--mute); line-height: 1.5; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
+.tag  { font-size: 11px; padding: 3px 9px; border-radius: 20px; }
+.tq { background: rgba(255,255,255,.04); color: var(--mute); border: 1px solid var(--brd2); }
+.tv { background: var(--sl); color: #7EB0E8; border: 1px solid rgba(36,88,160,.28); }
+.tm { background: var(--jl); color: #6EC892; border: 1px solid rgba(30,122,82,.28); }
+.ta { background: var(--al); color: var(--amber); border: 1px solid rgba(232,160,32,.28); }
+.milestone {
+  background: var(--al); border: 1px solid rgba(232,160,32,.22);
+  border-radius: var(--r); padding: 11px 14px;
+  font-size: 12px; color: #D4A850; margin-top: 1rem;
+  display: flex; gap: 8px; align-items: flex-start; line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════
+   TABLES
+══════════════════════════════════════════ */
+.tbl { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+.tbl th {
+  text-align: left; padding: 8px 12px;
+  background: var(--ink3);
+  font-size: 10px; font-weight: 700; color: var(--mute);
+  text-transform: uppercase; letter-spacing: .08em;
+}
+.tbl td { padding: 9px 12px; border-bottom: 1px solid var(--brd); color: var(--sand); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: rgba(255,255,255,.018); }
+
+.hy  { color: var(--amber);  font-weight: 600; }
+.hg  { color: #6EC892; font-weight: 600; }
+.hb  { color: #7EB0E8; font-weight: 600; }
+.hr  { color: var(--flame);  font-weight: 600; }
+
+/* ══════════════════════════════════════════
+   CALLOUTS
+══════════════════════════════════════════ */
+.call { border-radius: var(--r); padding: 12px 15px; font-size: 13px; margin-top: 11px; line-height: 1.65; }
+.call-y { background: var(--al);  border-left: 3px solid var(--amber); color: #D4A850; }
+.call-g { background: var(--jl);  border-left: 3px solid var(--jade);  color: #7ED4A4; }
+.call-r { background: var(--fl);  border-left: 3px solid var(--flame); color: #F08060; }
+.call-b { background: var(--sl);  border-left: 3px solid var(--sky);   color: #8AABE0; }
+
+/* ══════════════════════════════════════════
+   NUMBER GRID  (0-10)
+══════════════════════════════════════════ */
+.ngrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin: 12px 0; }
+@media (max-width: 700px) { .ngrid { grid-template-columns: repeat(4,1fr); } }
+.ncell {
+  background: var(--ink3); border: 1px solid var(--brd);
+  border-radius: var(--r); padding: 10px 8px;
+  text-align: center; transition: border-color .15s; cursor: default;
+}
+.ncell:hover { border-color: var(--amber); }
+.ncell-n { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--amber); line-height: 1; }
+.ncell-w { font-size: 12px; font-weight: 600; color: var(--sand); margin-top: 4px; }
+.ncell-k { font-size: 10px; color: var(--mute); margin-top: 2px; }
+
+/* ── tens grid ── */
+.tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
+.tcell {
+  background: var(--ink3); border: 1px solid var(--brd);
+  border-radius: var(--r); padding: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.tcell-n { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--flame); min-width: 52px; line-height: 1; }
+.tcell-w { font-size: 13px; font-weight: 600; color: var(--sand); }
+.tcell-r { font-size: 11px; color: var(--mute); margin-top: 2px; }
+
+/* ══════════════════════════════════════════
+   INTERROGATIFS GRID
+══════════════════════════════════════════ */
+.iq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 12px 0; }
+.iq-card {
+  background: var(--ink3); border: 1px solid var(--brd);
+  border-radius: var(--rl); padding: 14px; transition: border-color .15s;
+}
+.iq-card:hover { border-color: var(--brd2); }
+.iq-word { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--amber); margin-bottom: 3px; }
+.iq-fr   { font-size: 13px; font-weight: 600; color: var(--sand); margin-bottom: 6px; }
+.iq-use  { font-size: 12px; color: var(--mute); margin-bottom: 6px; }
+.iq-ex   { font-size: 12px; font-style: italic; color: #6EC892; line-height: 1.5; }
+.iq-exf  { font-size: 11px; color: var(--mute); margin-top: 2px; }
+
+/* ══════════════════════════════════════════
+   GRAMMAR ACCORDION
+══════════════════════════════════════════ */
+.gr { background: var(--ink2); border: 1px solid var(--brd); border-radius: var(--rl); margin-bottom: 10px; overflow: hidden; }
+.gr-head {
+  padding: 13px 17px; display: flex; align-items: center;
+  justify-content: space-between; cursor: pointer; user-select: none;
+  transition: background .15s;
+}
+.gr-head:hover { background: var(--ink3); }
+.gr-label { font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 10px; color: var(--sand); }
+.gr-body  { padding: 0 17px 17px; border-top: 1px solid var(--brd); display: none; }
+.gr.open .gr-body { display: block; }
+.chev { transition: transform .2s; color: var(--mute); font-size: 12px; }
+.gr.open .chev { transform: rotate(180deg); }
+
+.lvl { font-size: 10px; padding: 2px 9px; border-radius: 10px; font-weight: 700; letter-spacing: .06em; }
+.la2 { background: var(--al); color: var(--amber); }
+.lb1 { background: var(--jl); color: #6EC892; }
+.lb2 { background: var(--fl); color: var(--flame2); }
+.lc1 { background: var(--sl); color: #7EB0E8; }
+
+/* ══════════════════════════════════════════
+   VOCABULARY
+══════════════════════════════════════════ */
+.vcat {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 9px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--mute);
+  margin: 1.5rem 0 .75rem; padding-bottom: 8px;
+  border-bottom: 1px solid var(--brd);
+}
+.vgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
+.vc {
+  background: var(--ink2); border: 1px solid var(--brd);
+  border-radius: var(--r); padding: 11px 13px;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  cursor: pointer; transition: all .15s;
+}
+.vc:hover { border-color: var(--brd2); background: var(--ink3); }
+.vc.known { border-color: var(--jade); background: var(--jl); }
+.vc.known .vw { color: #6EC892; }
+.vw  { font-weight: 700; font-size: 15px; color: var(--amber); }
+.vp  { font-size: 10px; color: var(--mute2); font-style: italic; margin-bottom: 2px; }
+.vfr { font-size: 12px; color: var(--mute); }
+.vex { font-size: 11px; color: rgba(110,200,146,.8); font-style: italic; margin-top: 2px; line-height: 1.4; }
+.vchk {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 1.5px solid var(--brd2); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; transition: all .15s;
+}
+.vc.known .vchk { background: var(--jade); border-color: var(--jade); color: #fff; }
+
+/* ══════════════════════════════════════════
+   FLASHCARDS
+══════════════════════════════════════════ */
+.fc-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+.fc-scene { width: 100%; max-width: 520px; height: 300px; perspective: 1200px; cursor: pointer; }
+.fc-inner {
+  width: 100%; height: 100%;
+  transition: transform .6s cubic-bezier(.4,.2,.2,1);
+  transform-style: preserve-3d; position: relative;
+}
+.fc-scene.flipped .fc-inner { transform: rotateY(180deg); }
+.fc-face {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: var(--rl);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 2rem; text-align: center;
+}
+.fc-front { background: linear-gradient(135deg, var(--ink3), var(--ink4)); border: 1px solid var(--brd2); }
+.fc-back  { background: var(--ink2); border: 1px solid var(--brd); transform: rotateY(180deg); }
+.fc-cat   { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin-bottom: .8rem; }
+.fc-word  { font-family: 'Syne', sans-serif; font-size: 40px; font-weight: 800; color: var(--amber); margin-bottom: .25rem; line-height: 1; }
+.fc-back .fc-word { font-size: 24px; color: var(--sand); font-weight: 700; }
+.fc-pron  { font-size: 13px; color: var(--mute2); font-style: italic; }
+.fc-hint  { font-size: 11px; color: var(--mute); margin-top: 5px; }
+.fc-click { font-size: 11px; color: var(--mute); opacity: .5; margin-top: 1.2rem; }
+.fc-ex    { font-size: 13px; font-style: italic; color: #6EC892; margin-top: 6px; }
+.fc-exfr  { font-size: 12px; color: var(--mute); margin-top: 3px; }
+.fc-prog  { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--mute); }
+.fc-dots  { display: flex; gap: 4px; }
+.fc-dot   { width: 6px; height: 6px; border-radius: 50%; background: var(--brd2); transition: all .2s; }
+.fc-dot.done { background: var(--jade); }
+.fc-dot.curr { background: var(--amber); width: 14px; border-radius: 3px; }
+
+/* ══════════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════════ */
+.btn {
+  padding: 10px 18px; border-radius: var(--r); font-size: 13px; font-weight: 500;
+  cursor: pointer; border: 1px solid var(--brd2);
+  background: var(--ink3); color: var(--sand);
+  transition: all .15s; font-family: 'Karla', sans-serif;
+}
+.btn:hover { background: var(--ink4); border-color: var(--brd3); }
+.btn-amber { background: var(--amber); color: var(--ink); border-color: var(--amber); font-weight: 700; }
+.btn-amber:hover { background: var(--amber2); }
+.btn-ok    { background: var(--jl); color: #6EC892; border-color: rgba(30,122,82,.3); }
+.btn-bad   { background: var(--fl); color: var(--flame2); border-color: rgba(217,79,30,.3); }
+
+/* ══════════════════════════════════════════
+   FILTER BAR
+══════════════════════════════════════════ */
+.fbar  { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.fbtn  {
+  padding: 5px 12px; border-radius: 20px; font-size: 12px;
+  cursor: pointer; border: 1px solid var(--brd2);
+  background: var(--ink3); color: var(--mute);
+  transition: all .15s; font-family: 'Karla', sans-serif;
+}
+.fbtn:hover  { color: var(--sand); border-color: var(--brd3); }
+.fbtn.active { background: var(--flame); color: #fff; border-color: var(--flame); }
+
+/* ══════════════════════════════════════════
+   ROLEPLAY
+══════════════════════════════════════════ */
+.rp-card { background: var(--ink2); border: 1px solid var(--brd); border-radius: var(--rl); margin-bottom: 1rem; overflow: hidden; }
+.rp-head { padding: .875rem 1.25rem; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--brd); }
+.rp-ico  { font-size: 22px; flex-shrink: 0; }
+.rp-title{ font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--sand); }
+.rp-body { padding: 1rem 1.25rem; }
+.diag    { display: flex; flex-direction: column; gap: 9px; }
+.dl { display: flex; gap: 10px; font-size: 13px; }
+.dspk {
+  font-weight: 700; font-size: 10px; min-width: 78px;
+  padding-top: 2px; text-transform: uppercase; letter-spacing: .07em; flex-shrink: 0;
+}
+.dspk.nurse  { color: var(--flame); }
+.dspk.parent { color: var(--sky2); }
+.dspk.sys    { color: var(--amber); }
+.dc .wol  { color: var(--sand); font-size: 13px; margin-bottom: 2px; line-height: 1.55; }
+.dc .tra  { color: var(--mute); font-style: italic; font-size: 12px; }
+.dc .note { color: var(--mute2); font-size: 11px; margin-top: 2px; }
+.vkey { margin-top: 12px; padding: 10px 13px; background: var(--jl); border-radius: var(--r); font-size: 12px; color: #7ED4A4; border: 1px solid rgba(30,122,82,.18); line-height: 1.6; }
+
+/* ══════════════════════════════════════════
+   QUIZ
+══════════════════════════════════════════ */
+.quiz-q {
+  font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700;
+  margin-bottom: 1.5rem; line-height: 1.25; color: var(--sand);
+}
+.quiz-opts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+.quiz-opt {
+  padding: 12px 17px; border-radius: var(--r);
+  border: 1.5px solid var(--brd2); background: var(--ink3);
+  cursor: pointer; font-size: 13px; transition: all .15s;
+  text-align: left; font-family: 'Karla', sans-serif; color: var(--sand);
+}
+.quiz-opt:hover   { border-color: var(--amber); background: var(--al); }
+.quiz-opt.correct { border-color: var(--jade);  background: var(--jl); color: #6EC892; pointer-events: none; }
+.quiz-opt.wrong   { border-color: var(--flame); background: var(--fl); color: var(--flame2); pointer-events: none; }
+.quiz-opt.disabled{ pointer-events: none; opacity: .4; }
+.quiz-fb { padding: 11px 15px; border-radius: var(--r); font-size: 13px; margin-bottom: 1rem; display: none; }
+.quiz-fb.ok  { background: var(--jl); border-left: 3px solid var(--jade);  color: #7ED4A4; display: block; }
+.quiz-fb.bad { background: var(--fl); border-left: 3px solid var(--flame); color: #F09060; display: block; }
+.quiz-score  { font-size: 12px; color: var(--mute); margin-bottom: 1rem; }
+.quiz-score strong { color: var(--sand); }
+
+/* ══════════════════════════════════════════
+   PLANNING
+══════════════════════════════════════════ */
+.streak {
+  background: linear-gradient(135deg, var(--ink3), var(--ink4));
+  border: 1px solid var(--brd2); border-radius: var(--rl);
+  padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem;
+  margin-bottom: 1.5rem; position: relative; overflow: hidden;
+}
+.streak::after {
+  content: ''; position: absolute; right: -24px; top: -24px;
+  width: 130px; height: 130px; border-radius: 50%;
+  border: 1px solid var(--brd2); opacity: .3;
+}
+.streak-n  { font-family: 'Syne', sans-serif; font-size: 56px; font-weight: 800; color: var(--amber); line-height: 1; }
+.streak-sub{ font-size: 12px; color: var(--mute); }
+.streak-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--sand); }
+
+.week-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 8px; margin-bottom: 1.5rem; }
+.day-card  {
+  background: var(--ink2); border: 1px solid var(--brd);
+  border-radius: var(--r); padding: 10px 5px;
+  text-align: center; cursor: pointer; transition: all .15s;
+}
+.day-card:hover { border-color: var(--brd2); }
+.day-card.done  { border-color: var(--jade); background: var(--jl); }
+.day-n { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--mute); margin-bottom: 6px; }
+.day-i { font-size: 18px; margin-bottom: 4px; }
+.day-a { font-size: 10px; color: var(--mute); line-height: 1.3; }
+.day-card.done .day-n, .day-card.done .day-a { color: #6EC892; }
+
+/* ══════════════════════════════════════════
+   RESOURCES
+══════════════════════════════════════════ */
+.res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.res-card {
+  background: var(--ink2); border: 1px solid var(--brd);
+  border-radius: var(--r); padding: 13px;
+  display: flex; gap: 11px; align-items: flex-start; transition: border-color .15s;
+}
+.res-card:hover { border-color: var(--brd2); }
+.res-ico  { font-size: 20px; flex-shrink: 0; }
+.res-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; margin-bottom: 3px; color: var(--sand); }
+.res-desc { font-size: 11px; color: var(--mute); line-height: 1.5; }
+.res-badge{ font-size: 10px; padding: 2px 8px; border-radius: 20px; margin-top: 5px; display: inline-block; }
+
+/* ══════════════════════════════════════════
+   PHONETICS
+══════════════════════════════════════════ */
+.ph-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 1.25rem; }
+.ph-cell {
+  background: var(--ink3); border: 1px solid var(--brd2);
+  border-radius: var(--r); padding: 14px; text-align: center;
+}
+.ph-snd  { font-family: 'Syne', sans-serif; font-size: 34px; font-weight: 800; color: var(--amber); line-height: 1; margin-bottom: 5px; }
+.ph-name { font-size: 10px; color: var(--mute); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.ph-tip  { font-size: 12px; color: var(--sand); }
+.ph-ex   { font-size: 11px; color: #6EC892; font-style: italic; margin-top: 4px; }
+
+/* UTIL */
+.divider { border: none; border-top: 1px solid var(--brd); margin: 1.5rem 0; }
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+strong.g { color: #6EC892; }
+strong.y { color: var(--amber); }
+strong.r { color: var(--flame2); }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="hdr">
+  <div class="hdr-left">
+    <div class="hdr-logo">W</div>
+    <div>
+      <div class="hdr-title">Wolof <span>Xam-Xam</span></div>
+      <div class="hdr-sub">Plateforme bilingue avancée · Infirmière puéricultrice</div>
+    </div>
+  </div>
+  <div class="hdr-pill">Niveau C1</div>
+</header>
+
+<!-- ═══ APP ═══ -->
+<div class="layout">
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar">
+  <div class="sb-prog">
+    <div class="sb-prog-card">
+      <div class="sb-prog-title">Progression</div>
+      <div class="sb-prow">
+        <div class="sb-plabel">Mots</div>
+        <div class="sb-ptrack"><div class="sb-pfill gold" id="pb-w" style="width:5%"></div></div>
+        <div class="sb-pval"  id="pv-w">0/300</div>
+      </div>
+      <div class="sb-prow">
+        <div class="sb-plabel">Jours</div>
+        <div class="sb-ptrack"><div class="sb-pfill green" id="pb-d" style="width:0%"></div></div>
+        <div class="sb-pval"  id="pv-d">0/7</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Plan &amp; structure</div>
+    <div class="nav-item active" data-page="accueil">  <span class="nav-ico">🏠</span>Accueil &amp; Plan<span class="nav-badge">3 phases</span></div>
+    <div class="nav-item"        data-page="phonetique"><span class="nav-ico">🔊</span>Phonétique</div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Bases renforcées</div>
+    <div class="nav-item" data-page="nombres">      <span class="nav-ico">🔢</span>Nombres 0–100 <span class="nav-badge g">RAPPEL</span></div>
+    <div class="nav-item" data-page="interrogatifs"><span class="nav-ico">❓</span>Interrogatifs  <span class="nav-badge g">RAPPEL</span></div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Langue &amp; pratique</div>
+    <div class="nav-item" data-page="grammaire">  <span class="nav-ico">📐</span>Grammaire avancée</div>
+    <div class="nav-item" data-page="vocabulaire"><span class="nav-ico">📚</span>Vocabulaire</div>
+    <div class="nav-item" data-page="flashcards"> <span class="nav-ico">🃏</span>Flashcards</div>
+    <div class="nav-item" data-page="roleplays">  <span class="nav-ico">👶</span>Jeux de rôle</div>
+    <div class="nav-item" data-page="quiz">        <span class="nav-ico">🎯</span>Quiz</div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Organisation</div>
+    <div class="nav-item" data-page="planning">  <span class="nav-ico">📅</span>Planning</div>
+    <div class="nav-item" data-page="ressources"><span class="nav-ico">🔗</span>Ressources</div>
+  </div>
+
+  <div class="sb-legend">
+    <div class="sb-leg-item"><span class="sb-leg-dot" style="background:rgba(255,255,255,.14)"></span>Quotidien</div>
+    <div class="sb-leg-item"><span class="sb-leg-dot" style="background:var(--sl);border:1px solid rgba(36,88,160,.4)"></span>Voyage / Humanitaire</div>
+    <div class="sb-leg-item"><span class="sb-leg-dot" style="background:var(--jl);border:1px solid rgba(30,122,82,.4)"></span>Médical pédiatrique</div>
+    <div class="sb-leg-item"><span class="sb-leg-dot" style="background:var(--al);border:1px solid rgba(232,160,32,.4)"></span>Avancé / Idiomatique</div>
+  </div>
+</aside>
+
+<!-- ── MAIN ── -->
+<main class="main">
+
+<!-- ════════════════════════════════════ ACCUEIL ════ -->
+<div class="page active" id="page-accueil">
+  <div class="ph">
+    <div class="ph-eye">Wolof Jàng · Niveau bilingue</div>
+    <div class="ph-title">Plan d'apprentissage<br><em>C1 avancé</em></div>
+    <div class="ph-sub">Programme intensif pour l'autonomie complète en wolof médical et quotidien. Conçu pour les infirmières puéricultrices en mission au Sénégal ou en Afrique de l'Ouest.</div>
+  </div>
+
+  <div class="card card-sm" style="border-color:var(--brd2);margin-bottom:1.5rem;">
+    <div style="font-size:13px;color:var(--sand);line-height:1.75;">
+      🌍 <strong class="y">Pourquoi le wolof ?</strong> Lingua franca du Sénégal — compris et parlé par 90 % de la population, quelle que soit l'ethnie. Au niveau C1, vous pouvez <strong class="g">soigner, rassurer et éduquer</strong> sans interprète, et accéder à la confiance profonde (teranga) qui conditionne l'adhésion thérapeutique.
+    </div>
+  </div>
+
+  <div class="phase-card">
+    <div class="pc-head">
+      <div class="pc-badge" style="background:var(--fl);color:var(--flame2);border:1px solid rgba(217,79,30,.3);">Phase 1 · A2</div>
+      <div class="pc-title">Fondations — sons, survie, salutations rituelles</div>
+      <div class="pc-dur">Mois 1–2 · 30 min/j</div>
+    </div>
+    <div class="pc-body">
+      <div class="pc-mods">
+        <div class="mod"><div class="mod-name">🔊 Phonétique</div><div class="mod-desc">ñ, x, ng, mb, nd, nj — prénasales et voyelles longues</div></div>
+        <div class="mod"><div class="mod-name">👋 Salutations rituelles</div><div class="mod-desc">Rituel social incontournable — ne jamais négliger avant une consultation</div></div>
+        <div class="mod"><div class="mod-name">🔢 Nombres 0–100</div><div class="mod-desc">Base 5 pour 6–9, logique multiplicative, dosages médicaux</div></div>
+      </div>
+      <div class="tags">
+        <span class="tag tq">Se présenter</span><span class="tag tq">Corps humain</span>
+        <span class="tag tv">Arrivée à Dakar</span>
+        <span class="tag tm">Douleur · fièvre</span>
+      </div>
+      <div class="milestone"><span>🎯</span><span><strong>Objectif :</strong> Saluer rituellement, se présenter (Maa ngi tuddu… Infirmière laa), compter jusqu'à 100, poser les questions simples. ~300 mots actifs.</span></div>
+    </div>
+  </div>
+
+  <div class="phase-card">
+    <div class="pc-head">
+      <div class="pc-badge" style="background:var(--jl);color:#6EC892;border:1px solid rgba(30,122,82,.3);">Phase 2 · B1–B2</div>
+      <div class="pc-title">Consolidation — consultations, interrogatifs, quotidien sénégalais</div>
+      <div class="pc-dur">Mois 3–6 · 45 min/j</div>
+    </div>
+    <div class="pc-body">
+      <div class="pc-mods">
+        <div class="mod"><div class="mod-name">❓ Interrogatifs</div><div class="mod-desc">Fan, Ku, Ana, Ñaata, Lan, Ndax, Kañ, Naka — anamnèse complète</div></div>
+        <div class="mod"><div class="mod-name">🏥 Consultations</div><div class="mod-desc">Signes vitaux, explication des soins, vaccination, SRO, MUAC</div></div>
+        <div class="mod"><div class="mod-name">🌿 Culture médicale</div><div class="mod-desc">Gris-gris, médecine traditionnelle, décisions familiales collectives</div></div>
+      </div>
+      <div class="tags">
+        <span class="tag tq">Vie au marché</span><span class="tag tq">Transports</span>
+        <span class="tag tv">Poste de santé</span>
+        <span class="tag tm">Vaccination · SRO</span><span class="tag ta">Marqueurs aspectuels</span>
+      </div>
+      <div class="milestone"><span>🎯</span><span><strong>Objectif :</strong> Mener une anamnèse complète, expliquer un traitement, gérer une urgence. Poser toutes les questions médicales essentielles. ~1 000 mots actifs.</span></div>
+    </div>
+  </div>
+
+  <div class="phase-card">
+    <div class="pc-head">
+      <div class="pc-badge" style="background:var(--sl);color:#7EB0E8;border:1px solid rgba(36,88,160,.3);">Phase 3 · C1</div>
+      <div class="pc-title">Maîtrise bilingue — pédiatrie avancée &amp; idiomes</div>
+      <div class="pc-dur">Mois 7–12 · 60 min/j</div>
+    </div>
+    <div class="pc-body">
+      <div class="pc-mods">
+        <div class="mod"><div class="mod-name">👶 Pédiatrie avancée</div><div class="mod-desc">Malnutrition MUAC, paludisme grave, néonatologie, drépanocytose</div></div>
+        <div class="mod"><div class="mod-name">🗣️ Style indirect</div><div class="mod-desc">Rapporter des propos, transmissions médicales, récit complexe</div></div>
+        <div class="mod"><div class="mod-name">🎭 Pragmatique</div><div class="mod-desc">Proverbes wolof, humour sénégalais, médiation culturelle</div></div>
+      </div>
+      <div class="tags">
+        <span class="tag tm">Néonatologie · SMI</span>
+        <span class="tag ta">Proverbes wolof</span><span class="tag ta">Médiation culturelle</span>
+        <span class="tag tv">Coordination ONG</span>
+      </div>
+      <div class="milestone"><span>🎯</span><span><strong>Objectif :</strong> Autonomie complète. Former du personnel local. Utiliser les proverbes wolof pour renforcer l'adhésion thérapeutique. ~2 000+ mots actifs.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ PHONÉTIQUE ════ -->
+<div class="page" id="page-phonetique">
+  <div class="ph">
+    <div class="ph-eye">Sons &amp; prononciation</div>
+    <div class="ph-title">Phonétique <em>wolof</em></div>
+    <div class="ph-sub">L'orthographe wolof est phonétique — chaque lettre a une valeur fixe. Maîtrisez ces sons dès le départ pour ne jamais prendre de mauvaises habitudes.</div>
+  </div>
+
+  <div class="ph-grid">
+    <div class="ph-cell"><div class="ph-snd">ñ</div><div class="ph-name">N palatalisé</div><div class="ph-tip">Comme "gn" dans agneau</div><div class="ph-ex">ñaan (demander) · ñibbi · ñeent</div></div>
+    <div class="ph-cell"><div class="ph-snd">x</div><div class="ph-name">Fricative vélaire</div><div class="ph-tip">Comme "j" espagnol ou "ch" de Bach</div><div class="ph-ex">xam (savoir) · xale · xarala</div></div>
+    <div class="ph-cell"><div class="ph-snd">ng</div><div class="ph-name">Nasale vélaire</div><div class="ph-tip">Comme "ng" de parking — peut être initial !</div><div class="ph-ex">ngor · ngoon · ngelaw</div></div>
+    <div class="ph-cell"><div class="ph-snd">mb</div><div class="ph-name">Prénasale labiale</div><div class="ph-tip">m + b fusionnés en un seul son</div><div class="ph-ex">mbaar · mbëkk · mbind</div></div>
+    <div class="ph-cell"><div class="ph-snd">nd</div><div class="ph-name">Prénasale dentale</div><div class="ph-tip">n + d fusionnés en un seul son</div><div class="ph-ex">ndox (eau) · ndeye · ndimbal</div></div>
+    <div class="ph-cell"><div class="ph-snd">nj</div><div class="ph-name">Prénasale palatale</div><div class="ph-tip">Son typiquement wolof — pratiquez-le !</div><div class="ph-ex">njëkk · njool · njaboot</div></div>
+  </div>
+
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-lbl">Voyelles longues — changent le sens !</div><div class="sdiv-line"></div></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Type</th><th>Explication</th><th>Exemple</th></tr>
+      <tr><td>Voyelle courte</td><td>Durée normale</td><td><span class="hy">xam</span> = savoir</td></tr>
+      <tr><td>Voyelle longue (doublée)</td><td>Durée vraiment doublée — sens différent !</td><td><span class="hy">xaam</span> = cousin</td></tr>
+      <tr><td>Accent tonique</td><td>1re syllabe en général</td><td><span class="hy">NAN</span>-ga def, <span class="hy">FEE</span>-bar</td></tr>
+    </table>
+    <div class="call call-y">💡 <strong>Paires minimales médicales :</strong> <em>dem</em> (aller) ≠ <em>dëm</em> (partir définitivement) · <em>bët</em> (œil) ≠ <em>bëët</em> (regarder avec insistance). Soignez toujours la longueur vocalique.</div>
+  </div>
+
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-lbl">Salutations rituelles — incontournables</div><div class="sdiv-line"></div></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Moment</th><th>Formule wolof</th><th>Réponse attendue</th><th>Traduction</th></tr>
+      <tr><td>Rencontre</td><td class="hy">Salaam aleekum</td><td class="hg">Maalekum salaam</td><td>La paix soit sur toi</td></tr>
+      <tr><td>Général</td><td class="hy">Nanga def ?</td><td class="hg">Maa ngi fi rekk</td><td>Comment vas-tu ? / Je suis là.</td></tr>
+      <tr><td>Matin</td><td class="hy">Fanaan ak jàmm ?</td><td class="hg">Jàmm rekk</td><td>As-tu passé la nuit en paix ?</td></tr>
+      <tr><td>Famille</td><td class="hy">Ana sa kër gi ?</td><td class="hg">Ñu ngi fa rekk</td><td>Comment va ta famille ?</td></tr>
+      <tr><td>Merci</td><td class="hy">Jërejëf</td><td class="hg">Waaw, jërejëf</td><td>Merci / Oui, merci.</td></tr>
+      <tr><td>Au revoir</td><td class="hy">Mangi dem</td><td class="hg">Yendoo ak jàmm</td><td>Je pars / Va en paix.</td></tr>
+    </table>
+    <div class="call call-r">🌍 <strong>Règle d'or :</strong> Ne jamais passer directement au motif médical sans 2–3 échanges de salutations. C'est la teranga — la confiance qui conditionne l'adhésion thérapeutique. Les familles qui ne se sentent pas saluées correctement coopèrent moins.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ NOMBRES ════ -->
+<div class="page" id="page-nombres">
+  <div class="ph">
+    <div class="ph-eye">Rappel des bases</div>
+    <div class="ph-title">Nombres <em>0 à 100</em></div>
+    <div class="ph-sub">Indispensables pour les dosages, âges, températures, durées de traitement et toute communication médicale précise.</div>
+  </div>
+
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-lbl">0 à 10 — la base absolue</div><div class="sdiv-line"></div></div>
+  <div class="ngrid">
+    <div class="ncell"><div class="ncell-n">0</div><div class="ncell-w">dara</div><div class="ncell-k">rien/zéro</div></div>
+    <div class="ncell"><div class="ncell-n">1</div><div class="ncell-w">benn</div><div class="ncell-k">un</div></div>
+    <div class="ncell"><div class="ncell-n">2</div><div class="ncell-w">ñaar</div><div class="ncell-k">deux</div></div>
+    <div class="ncell"><div class="ncell-n">3</div><div class="ncell-w">ñett</div><div class="ncell-k">trois</div></div>
+    <div class="ncell"><div class="ncell-n">4</div><div class="ncell-w">ñeent</div><div class="ncell-k">quatre</div></div>
+    <div class="ncell"><div class="ncell-n">5</div><div class="ncell-w">juróom</div><div class="ncell-k">cinq</div></div>
+    <div class="ncell"><div class="ncell-n">6</div><div class="ncell-w">juróom benn</div><div class="ncell-k">5 + 1</div></div>
+    <div class="ncell"><div class="ncell-n">7</div><div class="ncell-w">juróom ñaar</div><div class="ncell-k">5 + 2</div></div>
+    <div class="ncell"><div class="ncell-n">8</div><div class="ncell-w">juróom ñett</div><div class="ncell-k">5 + 3</div></div>
+    <div class="ncell"><div class="ncell-n">9</div><div class="ncell-w">juróom ñeent</div><div class="ncell-k">5 + 4</div></div>
+    <div class="ncell"><div class="ncell-n">10</div><div class="ncell-w">fukk</div><div class="ncell-k">dix (base)</div></div>
+    <div class="ncell"><div class="ncell-n">11</div><div class="ncell-w">fukk ak benn</div><div class="ncell-k">10 + 1</div></div>
+  </div>
+
+  <div class="call call-y" style="margin-bottom:1.5rem;">💡 <strong>Logique de 6 à 9 :</strong> Le wolof utilise une <strong>base 5</strong>. <em>juróom</em> (5) + le complément. 6 = "cinq-un", 7 = "cinq-deux"… Simple et régulier ! La logique est identique pour les dizaines.</div>
+
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-lbl">Dizaines — logique multiplicative</div><div class="sdiv-line"></div></div>
+  <div class="tgrid">
+    <div class="tcell"><div class="tcell-n">10</div><div><div class="tcell-w">fukk</div><div class="tcell-r">dix (base)</div></div></div>
+    <div class="tcell"><div class="tcell-n">20</div><div><div class="tcell-w">ñaar fukk</div><div class="tcell-r">2 × dix</div></div></div>
+    <div class="tcell"><div class="tcell-n">30</div><div><div class="tcell-w">ñett fukk</div><div class="tcell-r">3 × dix</div></div></div>
+    <div class="tcell"><div class="tcell-n">40</div><div><div class="tcell-w">ñeent fukk</div><div class="tcell-r">4 × dix</div></div></div>
+    <div class="tcell"><div class="tcell-n">50</div><div><div class="tcell-w">juróom fukk</div><div class="tcell-r">5 × dix</div></div></div>
+    <div class="tcell"><div class="tcell-n">60</div><div><div class="tcell-w">juróom benn fukk</div><div class="tcell-r">6 × dix</div></div></div>
+    <div class="tcell"><div class="tcell-n">70</div><div><div class="tcell-w">juróom ñaar fukk</div><div class="tcell-r">7 × dix</div></div></div>
+    <div class="tcell"><div class="tcell-n">80</div><div><div class="tcell-w">juróom ñett fukk</div><div class="tcell-r">8 × dix</div></div></div>
+    <div class="tcell"><div class="tcell-n">90</div><div><div class="tcell-w">juróom ñeent fukk</div><div class="tcell-r">9 × dix</div></div></div>
+    <div class="tcell"><div class="tcell-n">100</div><div><div class="tcell-w">téeméer</div><div class="tcell-r">cent (mot propre)</div></div></div>
+  </div>
+
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-lbl">Nombres composés — exemples clés</div><div class="sdiv-line"></div></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Nombre</th><th>Composition</th><th>Wolof</th></tr>
+      <tr><td>11</td><td>10 + 1</td><td class="hy">fukk ak benn</td></tr>
+      <tr><td>15</td><td>10 + 5</td><td class="hy">fukk ak juróom</td></tr>
+      <tr><td>21</td><td>2×10 + 1</td><td class="hy">ñaar fukk ak benn</td></tr>
+      <tr><td>38</td><td>3×10 + 5+3</td><td class="hy">ñett fukk ak juróom ñett</td></tr>
+      <tr><td>45</td><td>4×10 + 5</td><td class="hy">ñeent fukk ak juróom</td></tr>
+      <tr><td>99</td><td>9×10 + 5+4</td><td class="hy">juróom ñeent fukk ak juróom ñeent</td></tr>
+    </table>
+    <div class="call call-g">🏥 <strong>Applications médicales directes :</strong><br>
+    • <em>Jël ko <strong>ñaar</strong> yoon ci <strong>benn</strong> bés</em> → Prends-le 2 fois par jour<br>
+    • <em>Dafa am <strong>ñett</strong> fan feebar</em> → Malade depuis 3 jours<br>
+    • <em>Xale bi am na <strong>fukk ak juróom ñaar</strong> weer</em> → L'enfant a 15 mois<br>
+    • <em>Temperature bi <strong>ñett fukk ak juróom ñeent</strong> degrés la</em> → 39°C<br>
+    • <em>Jël ko <strong>juróom</strong> ml ci <strong>benn</strong> yoon</em> → Donne-lui 5 ml en une prise</div>
+  </div>
+
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-lbl">Fractions &amp; dosages médicaux</div><div class="sdiv-line"></div></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Concept</th><th>Wolof</th><th>Exemple médical</th></tr>
+      <tr><td>La moitié</td><td class="hy">xaaré / dem ci digg</td><td>Jël xaaré càmm bi — Prends la moitié du comprimé</td></tr>
+      <tr><td>Fois par jour</td><td class="hy">yoon ci benn bés</td><td>ñaar yoon ci benn bés — 2 fois/jour</td></tr>
+      <tr><td>Toutes les X heures</td><td class="hy">ci képp X waxtu</td><td>ci képp juróom ñaar waxtu — toutes les 7h</td></tr>
+      <tr><td>Pendant X jours</td><td class="hy">ci X fan</td><td>ci ñett fukk fan — pendant 30 jours</td></tr>
+      <tr><td>Par prise (dose)</td><td class="hy">ci benn yoon</td><td>juróom ml ci benn yoon — 5 ml par prise</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ INTERROGATIFS ════ -->
+<div class="page" id="page-interrogatifs">
+  <div class="ph">
+    <div class="ph-eye">Rappel des bases</div>
+    <div class="ph-title">Adverbes <em>interrogatifs</em></div>
+    <div class="ph-sub">Les 8 mots-questions fondamentaux pour mener une anamnèse complète et conduire toute conversation médicale.</div>
+  </div>
+
+  <div class="iq-grid">
+    <div class="iq-card">
+      <div class="iq-word">Fan ?</div>
+      <div class="iq-fr">Où ? / À quel endroit ?</div>
+      <div class="iq-use">Lieu, localisation d'une douleur</div>
+      <div class="iq-ex">Fan la daw ? — Où as-tu mal ?<br>Fan nga dem ? — Où vas-tu ?</div>
+    </div>
+    <div class="iq-card">
+      <div class="iq-word">Ku ?</div>
+      <div class="iq-fr">Qui ?</div>
+      <div class="iq-use">Identité d'une personne</div>
+      <div class="iq-ex">Ku la woone ? — Qui t'a appelé ?<br>Ku moo ko def ? — Qui l'a fait ?</div>
+    </div>
+    <div class="iq-card">
+      <div class="iq-word">Ana ?</div>
+      <div class="iq-fr">Où est… ? (présence)</div>
+      <div class="iq-use">Chercher quelqu'un ou quelque chose</div>
+      <div class="iq-ex">Ana yaye bi ? — Où est la mère ?<br>Ana carnet bi ? — Où est le carnet ?</div>
+    </div>
+    <div class="iq-card">
+      <div class="iq-word">Ñaata ?</div>
+      <div class="iq-fr">Combien ?</div>
+      <div class="iq-use">Quantité, âge, durée, fréquence</div>
+      <div class="iq-ex">Ñaata fan la feebar ? — Depuis combien de jours ?<br>Ñaata at nga am ? — Quel âge as-tu ?</div>
+    </div>
+    <div class="iq-card">
+      <div class="iq-word">Lan ?</div>
+      <div class="iq-fr">Quoi ? Qu'est-ce que ?</div>
+      <div class="iq-use">Nature d'une chose, d'un symptôme</div>
+      <div class="iq-ex">Lan la am ? — Qu'est-ce qui se passe ?<br>Lan nga lekk ? — Qu'as-tu mangé ?</div>
+    </div>
+    <div class="iq-card">
+      <div class="iq-word">Ndax ?</div>
+      <div class="iq-fr">Est-ce que ? (oui/non)</div>
+      <div class="iq-use">Question fermée, vérification</div>
+      <div class="iq-ex">Ndax dafa feebar ? — Est-il malade ?<br>Ndax am nga garab ? — As-tu un médicament ?</div>
+    </div>
+    <div class="iq-card">
+      <div class="iq-word">Kañ ?</div>
+      <div class="iq-fr">Quand ?</div>
+      <div class="iq-use">Moment, date, heure, début d'un symptôme</div>
+      <div class="iq-ex">Kañ la tanq dëkk ? — Quand la fièvre a-t-elle commencé ?<br>Kañ la feebar ? — Quand es-tu tombé malade ?</div>
+    </div>
+    <div class="iq-card">
+      <div class="iq-word">Naka ?</div>
+      <div class="iq-fr">Comment ?</div>
+      <div class="iq-use">Manière, état, description d'un symptôme</div>
+      <div class="iq-ex">Naka la xale bi def ? — Comment va l'enfant ?<br>Naka mu daw ? — Comment ça fait mal ?</div>
+    </div>
+  </div>
+
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-lbl">Anamnèse complète — questions essentielles</div><div class="sdiv-line"></div></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Objectif clinique</th><th>Question wolof</th><th>Traduction</th></tr>
+      <tr><td>Motif de consultation</td><td class="hy">Lan la am ? / Lan la wëri ?</td><td>Qu'est-ce qui se passe ?</td></tr>
+      <tr><td>Durée des symptômes</td><td class="hy">Ñaata fan la am tanq / feebar ?</td><td>Depuis combien de jours a-t-il de la fièvre ?</td></tr>
+      <tr><td>Localisation douleur</td><td class="hy">Fan la daw ? Fan la gëm ?</td><td>Où as-tu mal ? Où ça serre ?</td></tr>
+      <tr><td>Intensité douleur</td><td class="hy">Dafa daw bu bari wala bu ndaw ?</td><td>Ça fait très mal ou un peu ?</td></tr>
+      <tr><td>Vomissements (nb)</td><td class="hy">Ñaata yoon mu soxor ci bi suba ?</td><td>Combien de fois a-t-il vomi ce matin ?</td></tr>
+      <tr><td>Alimentation</td><td class="hy">Ndax dafa lekk bi ngay jox ko ?</td><td>Mange-t-il ce que tu lui donnes ?</td></tr>
+      <tr><td>Médicaments déjà pris</td><td class="hy">Ndax amoon na ko ci kanam garab ?</td><td>A-t-il déjà pris un médicament ?</td></tr>
+      <tr><td>Allaitement</td><td class="hy">Ndax danga ko noppil biscuit kenn ?</td><td>Est-ce que tu l'allaites encore ?</td></tr>
+      <tr><td>Allergies</td><td class="hy">Ndax am na ko alerji ci garab yenn ?</td><td>A-t-il une allergie médicamenteuse ?</td></tr>
+      <tr><td>Vaccinations</td><td class="hy">Ndax amoon na ko piquer ci vaccination ?</td><td>A-t-il reçu ses vaccinations ?</td></tr>
+    </table>
+    <div class="call call-b">💬 <strong>Construction des questions :</strong> Mot interrogatif en tête + phrase normale → <em>Fan la daw ?</em> · Ou phrase normale + intonation montante → <em>Dafa feebar ?</em> · Le suffixe de focus <strong>-a</strong> (la, nga, mu) s'ajoute selon le sujet grammatical visé.</div>
+  </div>
+
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-lbl">Expressions temporelles clés</div><div class="sdiv-line"></div></div>
+  <div class="card">
+    <div class="g2">
+      <table class="tbl">
+        <tr><th colspan="2">Passé</th></tr>
+        <tr><td class="hy">démb</td><td>hier</td></tr>
+        <tr><td class="hy">bi suba</td><td>ce matin</td></tr>
+        <tr><td class="hy">bi ngoon</td><td>cet après-midi</td></tr>
+        <tr><td class="hy">ci X fan ci kanam</td><td>il y a X jours</td></tr>
+        <tr><td class="hy">bi jëmëna</td><td>la semaine passée</td></tr>
+      </table>
+      <table class="tbl">
+        <tr><th colspan="2">Futur &amp; présent</th></tr>
+        <tr><td class="hy">léegi</td><td>maintenant</td></tr>
+        <tr><td class="hy">ëllëg</td><td>demain</td></tr>
+        <tr><td class="hy">ci kanam</td><td>plus tard / dans le futur</td></tr>
+        <tr><td class="hy">ci X fan</td><td>dans X jours</td></tr>
+        <tr><td class="hy">ci képp X waxtu</td><td>toutes les X heures</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ GRAMMAIRE ════ -->
+<div class="page" id="page-grammaire">
+  <div class="ph">
+    <div class="ph-eye">Grammaire avancée</div>
+    <div class="ph-title">Structure de la <em>langue</em></div>
+    <div class="ph-sub">Des classes nominales aux constructions C1 — avec focus sur les usages médicaux et professionnels.</div>
+  </div>
+
+  <div class="gr" id="gr0">
+    <div class="gr-head" onclick="tgr('gr0')">
+      <div class="gr-label"><span class="lvl la2">A2</span>Classes nominales — suffixes de détermination</div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="gr-body">
+      <p style="font-size:13px;margin:12px 0 8px;color:var(--sand);">Pas de genre en wolof. Les noms appartiennent à des <strong class="y">classes nominales</strong> marquées par un suffixe spécifique.</p>
+      <table class="tbl">
+        <tr><th>Classe</th><th>Suffixe</th><th>Exemple médical</th><th>Usage</th></tr>
+        <tr><td>B (humain général)</td><td class="hy">-bi</td><td>xale <span class="hy">bi</span> — l'enfant</td><td>Humains en général</td></tr>
+        <tr><td>K (humain désigné)</td><td class="hy">-ki</td><td>doktoor <span class="hy">ki</span> — ce médecin-ci</td><td>Humain spécifique, proche</td></tr>
+        <tr><td>G (lieu, espace)</td><td class="hy">-gi</td><td>kër <span class="hy">gi</span> — la maison</td><td>Lieux, espaces</td></tr>
+        <tr><td>J (objets longs)</td><td class="hy">-ji</td><td>jeringa <span class="hy">ji</span> — la seringue</td><td>Objets allongés</td></tr>
+        <tr><td>L (liquides, abstraits)</td><td class="hy">-li</td><td>ndox <span class="hy">li</span> — l'eau</td><td>Liquides, abstractions</td></tr>
+        <tr><td>Y (pluriel universel)</td><td class="hy">-yi</td><td>xale <span class="hy">yi</span> — les enfants</td><td>Tout pluriel</td></tr>
+      </table>
+      <div class="call call-y">💡 En pratique médicale, maîtrisez <strong>-bi</strong> (humains) et <strong>-yi</strong> (pluriels) en priorité. Les autres s'acquièrent par immersion progressive.</div>
+    </div>
+  </div>
+
+  <div class="gr" id="gr1">
+    <div class="gr-head" onclick="tgr('gr1')">
+      <div class="gr-label"><span class="lvl lb1">B1</span>Marqueurs verbaux — temps, aspect, focus</div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="gr-body">
+      <p style="font-size:13px;margin:12px 0 8px;color:var(--sand);">Le verbe wolof est invariable. C'est le <strong class="y">marqueur préverbal</strong> qui exprime tout : temps, aspect, sujet et focus.</p>
+      <table class="tbl">
+        <tr><th>Marqueur</th><th>Sens / focus</th><th>Exemple médical</th></tr>
+        <tr><td class="hy">dafa</td><td>Il/elle — focus verbe</td><td>Dafa <strong>feebar</strong> — Il est malade</td></tr>
+        <tr><td class="hy">maa ngi</td><td>Je suis en train de (présentatif)</td><td>Maa ngi <strong>jël</strong> température bi</td></tr>
+        <tr><td class="hy">dinaa</td><td>Je vais (futur 1re personne)</td><td>Dinaa ko <strong>wax</strong> doktoor bi</td></tr>
+        <tr><td class="hy">dama</td><td>J'ai fait / je fais (focus verbe, 1re p.)</td><td>Dama <strong>soxor</strong> — J'ai vomi</td></tr>
+        <tr><td class="hy">du / dut</td><td>Négation générale</td><td>Du <strong>feebar</strong> — Il n'est pas malade</td></tr>
+        <tr><td class="hy">amul</td><td>N'a pas (négation de "am")</td><td>Amul <strong>tanq</strong> — Il n'a pas de fièvre</td></tr>
+        <tr><td class="hy">dafa…-oon</td><td>Passé révolu</td><td>Dafa feebar<strong>oon</strong> ci démb</td></tr>
+      </table>
+      <div class="call call-r">🔥 <strong>Système de focus C1 :</strong><br>
+      <em>Xale bi <strong>dafa</strong> feebar</em> = L'enfant est MALADE (focus sur l'état)<br>
+      <em><strong>Xale bi la</strong> feebar</em> = C'est L'ENFANT qui est malade (focus sur le sujet)<br>
+      <em>Feebar <strong>la</strong> xale bi</em> = C'est DE MALADIE qu'il s'agit (focus sur le concept)<br>
+      Ce système de focus est unique au wolof — très puissant expressément.</div>
+    </div>
+  </div>
+
+  <div class="gr" id="gr2">
+    <div class="gr-head" onclick="tgr('gr2')">
+      <div class="gr-label"><span class="lvl lb2">B2</span>Subordination &amp; propositions complexes</div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="gr-body">
+      <table class="tbl">
+        <tr><th>Conjonction</th><th>Sens</th><th>Exemple médical</th></tr>
+        <tr><td class="hy">ndax</td><td>parce que / car</td><td>Dinaa ko jox garab, <span class="hy">ndax</span> dafa feebar</td></tr>
+        <tr><td class="hy">bu</td><td>quand / si (conditionnel)</td><td><span class="hy">Bu</span> dafa feebar, jox ko paracétamol</td></tr>
+        <tr><td class="hy">ba</td><td>jusqu'à ce que</td><td>Jël garab bi <span class="hy">ba</span> dafa baax</td></tr>
+        <tr><td class="hy">te</td><td>et (coordination)</td><td>Dafa feebar <span class="hy">te</span> dafay soxor</td></tr>
+        <tr><td class="hy">waaye</td><td>mais (opposition)</td><td>Dafay lekk, <span class="hy">waaye</span> dafay soxor</td></tr>
+        <tr><td class="hy">ngir</td><td>pour / afin de</td><td>Jël garab bi <span class="hy">ngir</span> xarala sa xale</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="gr" id="gr3">
+    <div class="gr-head" onclick="tgr('gr3')">
+      <div class="gr-label"><span class="lvl lc1">C1</span>Proverbes wolof pour l'éducation thérapeutique</div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="gr-body">
+      <p style="font-size:13px;margin:12px 0 8px;color:var(--sand);">Les proverbes renforcent immédiatement votre crédibilité et l'adhésion thérapeutique. Introduire par <em>"Wolof yi wax na…"</em> (les Wolofs disent que…).</p>
+      <table class="tbl">
+        <tr><th>Proverbe wolof</th><th>Sens littéral</th><th>Application médicale</th></tr>
+        <tr><td class="hy">Nit nit mooy garabam</td><td>L'homme est le remède de l'homme</td><td>Soutien communautaire dans la guérison</td></tr>
+        <tr><td class="hy">Dëkk bu baax, nit moo koy sëgg</td><td>Un bon village, c'est l'homme qui le bâtit</td><td>Santé de l'enfant = responsabilité collective</td></tr>
+        <tr><td class="hy">Ku xam xam, dafa am naqar</td><td>Celui qui sait a une responsabilité</td><td>Partager les connaissances de santé</td></tr>
+        <tr><td class="hy">Liggéey moo génne doole</td><td>Le travail donne de la force</td><td>Persistance dans les soins, rééducation</td></tr>
+      </table>
+      <div class="call call-g">🌟 L'humour wolof (xonnël) est aussi un outil puissant pour désamorcer l'anxiété parentale. Une touche légère avant une procédure douloureuse crée la confiance.</div>
+    </div>
+  </div>
+
+  <div class="gr" id="gr4">
+    <div class="gr-head" onclick="tgr('gr4')">
+      <div class="gr-label"><span class="lvl lb1">B1</span>Négation — formes complètes</div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="gr-body">
+      <table class="tbl">
+        <tr><th>Structure</th><th>Positif</th><th>Négatif</th></tr>
+        <tr><td>État (être)</td><td class="hy">Dafa feebar</td><td class="hr">Du feebar</td></tr>
+        <tr><td>Avoir (am)</td><td class="hy">Am na ko tanq</td><td class="hr">Amul tanq</td></tr>
+        <tr><td>Vouloir (bëgg)</td><td class="hy">Dafa bëgg lekk</td><td class="hr">Bëggul lekk</td></tr>
+        <tr><td>Savoir (xam)</td><td class="hy">Xam na ko</td><td class="hr">Xamul ko</td></tr>
+        <tr><td>Impératif négatif</td><td class="hy">Jox ko garab bi</td><td class="hr">Bul ko jox garab bi</td></tr>
+      </table>
+      <div class="call call-y">💊 <em>Bul def loolu !</em> = Ne fais pas ça ! — ton ferme mais bienveillant pour contredire une pratique dangereuse (ex. ne pas terminer le traitement antibiotique).</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ VOCABULAIRE ════ -->
+<div class="page" id="page-vocabulaire">
+  <div class="ph">
+    <div class="ph-eye">Vocabulaire avancé</div>
+    <div class="ph-title">Mots &amp; <em>expressions</em></div>
+    <div class="ph-sub">Cliquez sur un mot pour le marquer appris. Vocabulaire C1 sélectionné pour la pratique médicale.</div>
+  </div>
+  <div class="fbar">
+    <button class="fbtn active" onclick="fv('all',this)">Tout</button>
+    <button class="fbtn" onclick="fv('quotidien',this)">Quotidien</button>
+    <button class="fbtn" onclick="fv('voyage',this)">Voyage</button>
+    <button class="fbtn" onclick="fv('medical',this)">Médical</button>
+    <button class="fbtn" onclick="fv('avance',this)">Avancé</button>
+    <button class="fbtn" onclick="fv('unknown',this)">À apprendre</button>
+  </div>
+  <div id="vocab-list"></div>
+</div>
+
+<!-- ════════════════════════════════════ FLASHCARDS ════ -->
+<div class="page" id="page-flashcards">
+  <div class="ph">
+    <div class="ph-eye">Mémorisation active</div>
+    <div class="ph-title">Flash<em>cards</em></div>
+    <div class="ph-sub">Cliquez sur la carte pour révéler la traduction. Évaluez-vous honnêtement.</div>
+  </div>
+  <div class="fbar" style="margin-bottom:1.5rem;">
+    <button class="fbtn active" onclick="setFCF('all',this)">Tout</button>
+    <button class="fbtn" onclick="setFCF('quotidien',this)">Quotidien</button>
+    <button class="fbtn" onclick="setFCF('voyage',this)">Voyage</button>
+    <button class="fbtn" onclick="setFCF('medical',this)">Médical</button>
+    <button class="fbtn" onclick="setFCF('avance',this)">Avancé</button>
+  </div>
+  <div class="fc-wrap">
+    <div class="fc-prog">
+      <span id="fc-ctr">Carte 1/20</span>
+      <div class="fc-dots" id="fc-dots"></div>
+    </div>
+    <div class="fc-scene" id="fc-scene" onclick="flipCard()">
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-cat"  id="fc-cat">MÉDICAL</div>
+          <div class="fc-word" id="fc-word">Feebar</div>
+          <div class="fc-pron" id="fc-pron">[fé-bar]</div>
+          <div class="fc-hint" id="fc-hint">Verbe d'état</div>
+          <div class="fc-click">Cliquez pour révéler ↓</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-cat"  id="fc-cat-b">MÉDICAL</div>
+          <div class="fc-word" id="fc-tr">Être malade</div>
+          <div class="fc-ex"   id="fc-ex">„Xale bi dafa feebar."</div>
+          <div class="fc-exfr" id="fc-exfr">L'enfant est malade.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-bad"   onclick="rateCard(false)">❌ À revoir</button>
+      <button class="btn"           onclick="prevCard()">← Préc.</button>
+      <button class="btn"           onclick="nextCard()">Suiv. →</button>
+      <button class="btn btn-ok"    onclick="rateCard(true)">✓ Su</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ ROLEPLAYS ════ -->
+<div class="page" id="page-roleplays">
+  <div class="ph">
+    <div class="ph-eye">Pratique orale</div>
+    <div class="ph-title">Jeux de <em>rôle cliniques</em></div>
+    <div class="ph-sub">Dialogues wolof authentiques — pédiatrie, urgences et contexte humanitaire sénégalais.</div>
+  </div>
+
+  <!-- RP 1 -->
+  <div class="rp-card">
+    <div class="rp-head">
+      <div class="rp-ico">🍼</div>
+      <div>
+        <div class="rp-title">Consultation nourrisson — pesée &amp; allaitement</div>
+        <div style="font-size:11px;color:var(--mute)">Centre de santé, Dakar · Phase 2 · B1</div>
+      </div>
+      <span class="lvl lb1" style="margin-left:auto;">B1</span>
+    </div>
+    <div class="rp-body">
+      <div class="diag">
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Salaam aleekum. Nanga def, yaye bi ? Maa ngi tuddu Marie. Infirmière laa ci poste de santé bii.</div>
+          <div class="tra">Bonjour. Comment vas-tu, maman ? Je m'appelle Marie. Je suis infirmière de ce centre de santé.</div>
+        </div></div>
+        <div class="dl"><span class="dspk parent">Yaye</span><div class="dc">
+          <div class="wol">Maalekum salaam. Maa ngi fi rekk. Jërejëf. Xale bi dafay dëkk, dafay diwan lekk.</div>
+          <div class="tra">Que la paix soit sur toi. Je suis là. Merci. L'enfant pleure et refuse de manger.</div>
+        </div></div>
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Ana carnet bi ? Dina ko lomb ci bàsket bi. Jox ma ko. — Dey, dafa am ñaar kilo ak juróom fukk gramm. Dafa yem ci raayu bi.</div>
+          <div class="tra">Où est le carnet ? Je vais le peser. — Voilà, il pèse 2 kg 650 g. Il est sur la courbe normale.</div>
+          <div class="note">raayu bi = la courbe de croissance</div>
+        </div></div>
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Ndax danga ko noppil biscuit ? Ñaata yoon ci benn bés ?</div>
+          <div class="tra">Est-ce que tu l'allaites encore ? Combien de fois par jour ?</div>
+        </div></div>
+        <div class="dl"><span class="dspk parent">Yaye</span><div class="dc">
+          <div class="wol">Waaw, noppil naa ko. Waaye ñaareel yoon rekk ci benn bés — maa soxna ci liggéey.</div>
+          <div class="tra">Oui, je l'allaite. Mais seulement 3 fois par jour — je suis fatiguée du travail.</div>
+        </div></div>
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Xam naa sa yaakaar. Waaye xale bu ñaar ñett weer, dafay soxna biscuit fukk ak juróom yoon ci benn bés. Bu nekk ñaar yoon rekk, dinaa ko am àll — dafa sori ndox.</div>
+          <div class="tra">Je comprends ta fatigue. Mais un enfant de 2–3 mois doit être allaité 8–10 fois par jour. Avec seulement 2 fois, il risque la déshydratation.</div>
+        </div></div>
+      </div>
+      <div class="vkey">📝 <strong>Vocabulaire clé :</strong> bàsket bi (balance) · lomb (peser) · raayu bi (courbe de croissance) · noppil biscuit (allaiter) · àll (déshydratation) · soxna (fatigué/e) · bën bés (par jour) · dëkk (pleurer) · diwan lekk (refuser de manger)</div>
+    </div>
+  </div>
+
+  <!-- RP 2 -->
+  <div class="rp-card">
+    <div class="rp-head">
+      <div class="rp-ico">🦟</div>
+      <div>
+        <div class="rp-title">Paludisme grave — anamnèse complète avec tous les interrogatifs</div>
+        <div style="font-size:11px;color:var(--mute)">Urgences pédiatriques · Phase 3 · B2</div>
+      </div>
+      <span class="lvl lb2" style="margin-left:auto;">B2</span>
+    </div>
+    <div class="rp-body">
+      <div class="diag">
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Lan la am ci xale bi ? Kañ la mu feebar dëkk ?</div>
+          <div class="tra">Qu'est-ce qui se passe avec l'enfant ? Quand a-t-il commencé à être malade ?</div>
+        </div></div>
+        <div class="dl"><span class="dspk parent">Yaye</span><div class="dc">
+          <div class="wol">Dafa feebar ci juróom fan ci kanam. Tanq am na ko bu dëgër. Dafay soxor ak yàq ci biir.</div>
+          <div class="tra">Il est malade depuis 5 jours. Il a une forte fièvre. Il vomit et a la diarrhée.</div>
+        </div></div>
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Ñaata yoon mu soxor ci démb ? Ndax am na ko convulsion yenn ? Fan la daw ci biir bi ?</div>
+          <div class="tra">Combien de fois a-t-il vomi hier ? A-t-il eu des convulsions ? Où a-t-il mal au ventre ?</div>
+        </div></div>
+        <div class="dl"><span class="dspk parent">Yaye</span><div class="dc">
+          <div class="wol">Juróom yoon mu soxor. Amoon na ko convulsion benn yoon — dafay dóor. Diwan lekk ak diwan naan ndox.</div>
+          <div class="tra">Il a vomi 5 fois. Il a eu une convulsion une fois — il tremblait. Il refuse de manger et de boire.</div>
+        </div></div>
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Xale bi dafa am sibiru bu xéex. Dafa am àll te convulsion am na ko. Waxtaan naa doktoor bi léegi léegi. Dinaa ko def perfusion — dinaa ko jox quinquina ci biir sang bi.</div>
+          <div class="tra">L'enfant a un paludisme grave. Il est déshydraté et a eu des convulsions. J'appelle le médecin immédiatement. Je vais lui faire une perfusion et administrer de la quinine en intraveineux.</div>
+        </div></div>
+        <div class="dl"><span class="dspk parent">Yaye</span><div class="dc">
+          <div class="wol">Waaye maa xam xam ci gris-gris bi, dina ko yaram bi tëbbal.</div>
+          <div class="tra">Mais je crois que le gris-gris va remettre son corps en ordre.</div>
+        </div></div>
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Xam naa nga gëm ci gris-gris bi. Nit nit mooy garabam — wolof yi wax loolu. Waaye tey, xale bi dafa sori quinquina bi léegi léegi. Gris-gris bi ak garab bi — ñoom ñaar bëgñu ko.</div>
+          <div class="tra">Je sais que tu crois au gris-gris. "L'homme est le remède de l'homme" — les Wolofs disent ça. Mais aujourd'hui l'enfant a besoin de quinine de toute urgence. Le gris-gris et le médicament peuvent coexister.</div>
+          <div class="note">Approche culturellement sensible : ne pas rejeter le gris-gris, proposer la coexistence</div>
+        </div></div>
+      </div>
+      <div class="vkey">📝 <strong>Vocabulaire avancé :</strong> sibiru bu xéex (paludisme grave) · convulsion · dóor (trembler/convulser) · perfusion · sang bi (veine) · quinquina · waxtaan (appeler) · tëbbal (remettre en ordre) · gëm (croire) · àll (déshydratation)</div>
+    </div>
+  </div>
+
+  <!-- RP 3 -->
+  <div class="rp-card">
+    <div class="rp-head">
+      <div class="rp-ico">📊</div>
+      <div>
+        <div class="rp-title">Évaluation MUAC — malnutrition aiguë sévère</div>
+        <div style="font-size:11px;color:var(--mute)">SMI / Programme nutritionnel · Phase 3 · C1</div>
+      </div>
+      <span class="lvl lc1" style="margin-left:auto;">C1</span>
+    </div>
+    <div class="rp-body">
+      <div class="diag">
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Dinaa ko def mesure MUAC ci baaxa génn bi. Loolu ci nga xam naka xale bi yëkk ci yaram bi.</div>
+          <div class="tra">Je vais faire la mesure MUAC sur son bras gauche. C'est comme ça qu'on évalue l'état nutritionnel de l'enfant.</div>
+        </div></div>
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Dey — roog mi mel na wu jën. Ci raayu bi, xale bi am na déficit nutritionnel bu xéex. Ñaata fan mu lekk ci kanam bi yëkk yëkk ?</div>
+          <div class="tra">Voilà — le ruban est rouge. L'enfant a une malnutrition aiguë sévère. Depuis combien de jours mange-t-il normalement ?</div>
+        </div></div>
+        <div class="dl"><span class="dspk parent">Yaye</span><div class="dc">
+          <div class="wol">Ci kanam juróom ñaar fukk fan mu diwan lekk. Amul xalis ngir jënd thiéboudienne yu baax.</div>
+          <div class="tra">Depuis 40 jours il refuse de manger. Je n'ai pas d'argent pour acheter de bons repas.</div>
+        </div></div>
+        <div class="dl"><span class="dspk nurse">Infirmière</span><div class="dc">
+          <div class="wol">Xam naa sa wàllu — dafa dëgër. Tey, dinaa ko bind ci programme CRENI bi. Dinaa ko jox PLUMPY-NUT — garab bu lekk bi. Jël ko ñaar yoon ci benn bés, fukk ak juróom gramm ci benn yoon. Ci kanam ñett fan, dinaa ci gëm sa xale.</div>
+          <div class="tra">Je comprends ta situation difficile. Aujourd'hui je vais l'inscrire au programme CRENI. Je vais lui donner du PLUMPY-NUT. Donnez-lui 2 fois par jour, 150 g par dose. Dans 3 jours, je réévaluerai l'enfant.</div>
+        </div></div>
+      </div>
+      <div class="vkey">📝 <strong>Vocabulaire spécialisé :</strong> MUAC · roog wu jën (ruban rouge) · déficit nutritionnel (malnutrition) · CRENI (centre de récupération nutritionnelle) · PLUMPY-NUT · yëkk yëkk (normalement) · wàllu (situation) · xalis (argent)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ QUIZ ════ -->
+<div class="page" id="page-quiz">
+  <div class="ph">
+    <div class="ph-eye">Auto-évaluation</div>
+    <div class="ph-title">Quiz <em>wolof</em></div>
+    <div class="ph-sub">Questions variées — vocabulaire, grammaire et interrogatifs.</div>
+  </div>
+  <div class="fbar">
+    <button class="fbtn active" onclick="setQF('all',this)">Tout</button>
+    <button class="fbtn" onclick="setQF('quotidien',this)">Quotidien</button>
+    <button class="fbtn" onclick="setQF('voyage',this)">Voyage</button>
+    <button class="fbtn" onclick="setQF('medical',this)">Médical</button>
+    <button class="fbtn" onclick="setQF('avance',this)">Avancé</button>
+  </div>
+  <div style="max-width:600px;">
+    <div class="quiz-score">Score : <strong id="qs-sc">0</strong> / <span id="qs-tot">0</span> — Question <strong id="qs-n">1</strong></div>
+    <div class="quiz-q"    id="quiz-q"></div>
+    <div class="quiz-opts" id="quiz-opts"></div>
+    <div class="quiz-fb"   id="quiz-fb"></div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-amber" id="quiz-nb" onclick="nextQ()" style="display:none;">Suivant →</button>
+      <button class="btn" onclick="restartQ()">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ PLANNING ════ -->
+<div class="page" id="page-planning">
+  <div class="ph">
+    <div class="ph-eye">Organisation</div>
+    <div class="ph-title">Planning <em>hebdomadaire</em></div>
+    <div class="ph-sub">Programme intensif C1 — accent sur l'immersion orale et la pratique médicale.</div>
+  </div>
+  <div class="streak">
+    <div><div class="streak-n" id="streak-n">0</div><div class="streak-sub">jours complétés</div></div>
+    <div>
+      <div class="streak-title">🔥 Jàng ci kanam — Continuez !</div>
+      <div class="streak-sub" style="margin-top:4px;">La régularité construit la fluidité — 45 min/jour suffisent.</div>
+    </div>
+  </div>
+  <div class="week-grid" id="week-grid"></div>
+  <div class="card">
+    <div class="card-title">📋 Programme type C1</div>
+    <table class="tbl">
+      <tr><th>Jour</th><th>Activité</th><th>Durée</th><th>Contenu concret</th></tr>
+      <tr><td>Lundi</td><td>📐 Grammaire + nombres</td><td>45 min</td><td>Marqueurs verbaux, focus, compter 0–100 à voix haute</td></tr>
+      <tr><td>Mardi</td><td>👂 Écoute immersive</td><td>45 min</td><td>Radio RFM Dakar, émissions santé wolof, musique sénégalaise</td></tr>
+      <tr><td>Mercredi</td><td>📚 Vocabulaire médical</td><td>45 min</td><td>Flashcards : pathologies pédiatriques, dosages, anamnèse</td></tr>
+      <tr><td>Jeudi</td><td>💬 Conversation tandem</td><td>45–60 min</td><td>HelloTalk avec soignant sénégalais — simuler des consultations</td></tr>
+      <tr><td>Vendredi</td><td>👶 Jeu de rôle clinique</td><td>45 min</td><td>Anamnèse complète en wolof, MUAC, transmission SMI</td></tr>
+      <tr><td>Samedi</td><td>🌍 Culture &amp; pragmatique</td><td>30 min</td><td>Proverbes wolof, films sénégalais (Moolaadé, Atlantique)</td></tr>
+      <tr><td>Dimanche</td><td>🎵 Révision immersive</td><td>1h</td><td>Révision libre, podcast santé Sénégal, écriture de phrases</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ RESSOURCES ════ -->
+<div class="page" id="page-ressources">
+  <div class="ph">
+    <div class="ph-eye">Bibliothèque</div>
+    <div class="ph-title">Ressources <em>sélectionnées</em></div>
+    <div class="ph-sub">Outils validés pour le wolof médical — niveau intermédiaire à avancé.</div>
+  </div>
+
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-lbl">Apprentissage &amp; immersion</div><div class="sdiv-line"></div></div>
+  <div class="res-grid">
+    <div class="res-card"><div class="res-ico">📗</div><div><div class="res-name">Peace Corps Wolof Manual</div><div class="res-desc">Manuel de référence complet — gratuit en PDF. Grammaire, dialogues, vocabulaire thématique. Indispensable pour tout apprenant sérieux.</div><div class="res-badge" style="background:var(--jl);color:#6EC892;">PDF gratuit · Essentiel</div></div></div>
+    <div class="res-card"><div class="res-ico">📻</div><div><div class="res-name">Radio RFM / RTS Dakar</div><div class="res-desc">Streaming en ligne. Émissions en wolof authentique — rythme naturel, actualité sénégalaise, langue vivante.</div><div class="res-badge" style="background:var(--jl);color:#6EC892;">Écoute · Gratuit</div></div></div>
+    <div class="res-card"><div class="res-ico">💬</div><div><div class="res-name">HelloTalk — Sénégal</div><div class="res-desc">Trouvez un agent de santé communautaire sénégalais. Précisez "infirmière en pédiatrie" pour une mise en relation ciblée.</div><div class="res-badge" style="background:var(--al);color:var(--amber);">Tandem · Gratuit</div></div></div>
+    <div class="res-card"><div class="res-ico">🎬</div><div><div class="res-name">Cinéma sénégalais</div><div class="res-desc">Moolaadé (Sembène), Atlantique (Mati Diop), Bànjul Series. Immersion culturelle et linguistique profonde.</div><div class="res-badge" style="background:var(--sl);color:#7EB0E8;">Culture · Streaming</div></div></div>
+  </div>
+
+  <div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-lbl">Wolof médical &amp; humanitaire</div><div class="sdiv-line"></div></div>
+  <div class="res-grid">
+    <div class="res-card"><div class="res-ico">🌍</div><div><div class="res-name">UNICEF Sénégal</div><div class="res-desc">Guides SMI, PCIME, nutrition en wolof. Vocabulaire officiel et validé par les équipes terrain au Sénégal.</div><div class="res-badge" style="background:var(--jl);color:#6EC892;">Médical · Gratuit</div></div></div>
+    <div class="res-card"><div class="res-ico">📋</div><div><div class="res-name">Glossaires ONG terrain</div><div class="res-desc">MSF, ACF, IRC publient des lexiques wolof-français pour agents de santé. Demandez lors du recrutement.</div><div class="res-badge" style="background:var(--al);color:var(--amber);">Spécialisé · Sur demande</div></div></div>
+    <div class="res-card"><div class="res-ico">🏥</div><div><div class="res-name">MSF / Médecins du Monde</div><div class="res-desc">Formations linguistiques pré-départ. Modules wolof pour soignants disponibles sur demande à la délégation.</div><div class="res-badge" style="background:var(--fl);color:var(--flame2);">ONG · Formation</div></div></div>
+    <div class="res-card"><div class="res-ico">👥</div><div><div class="res-name">ONAS Sénégal</div><div class="res-desc">Ordre des Infirmiers du Sénégal — partenariat d'échange professionnel. Votre expertise puériculture est très précieuse.</div><div class="res-badge" style="background:var(--jl);color:#6EC892;">Réseau · Professionnel</div></div></div>
+  </div>
+
+  <div class="call call-r" style="margin-top:1.5rem;">
+    🌍 <strong>Conseil C1 :</strong> À ce niveau, votre meilleure ressource est un stage de 4 semaines dans un poste de santé sénégalais. Contactez l'ONAS pour un partenariat d'échange professionnel — votre expertise en puériculture sera très précieuse en échange de l'immersion linguistique totale.
+  </div>
+</div>
+
+</main>
+</div><!-- end layout -->
+
+<script>
+// ══════════════════════════════════════════
+//  DATA
+// ══════════════════════════════════════════
+const VD = [
+  // QUOTIDIEN
+  {w:'Nanga def ?',    p:'[nan-GA def]',       f:'Comment vas-tu ?',                e:'Nanga def, yaye bi ?',              ef:'Comment vas-tu, maman ?',           c:'quotidien'},
+  {w:'Maa ngi fi rekk',p:'[maa ngi fi rekk]', f:'Je suis là / Ça va',              e:'Maa ngi fi rekk, jërejëf.',          ef:'Je suis là simplement, merci.',      c:'quotidien'},
+  {w:'Jërejëf',        p:'[djé-ré-djef]',      f:'Merci',                           e:'Jërejëf bu baari.',                  ef:'Merci beaucoup.',                    c:'quotidien'},
+  {w:'Waaw / Déedéet', p:'[waaw / DÉ-dét]',   f:'Oui / Non',                       e:'Waaw, dafa baax.',                   ef:'Oui, c\'est bien.',                  c:'quotidien'},
+  {w:'Xale bi',        p:'[xa-le bi]',          f:'L\'enfant',                       e:'Xale bi dafa feebar.',               ef:'L\'enfant est malade.',              c:'quotidien'},
+  {w:'Yaye / Ndeye',   p:'[ya-ye / nde-ye]',   f:'La mère',                         e:'Ana yaye bi ?',                      ef:'Où est la mère ?',                   c:'quotidien'},
+  {w:'Kër gi',         p:'[ker gi]',            f:'La maison / la famille',          e:'Dem ci kër gi léegi.',               ef:'Rentre à la maison maintenant.',     c:'quotidien'},
+  {w:'Teranga',        p:'[té-ran-ga]',         f:'Hospitalité sénégalaise',         e:'Teranga moo tax ñu nekk fii.',       ef:'C\'est la teranga qui nous unit.',   c:'quotidien'},
+  // VOYAGE
+  {w:'Poste de santé', p:'[poste de santé]',   f:'Centre de santé',                 e:'Ana poste de santé bi ?',            ef:'Où est le centre de santé ?',        c:'voyage'},
+  {w:'Waxtaan naa',    p:'[wak-taan naa]',      f:'Je vais appeler',                 e:'Waxtaan naa doktoor bi léegi léegi.',ef:'J\'appelle le médecin tout de suite.',c:'voyage'},
+  {w:'Léegi léegi',    p:'[lé-gi lé-gi]',       f:'Tout de suite / immédiatement',   e:'Dem léegi léegi !',                  ef:'Pars immédiatement !',               c:'voyage'},
+  {w:'Jàmm rekk',      p:'[djamm rekk]',        f:'Tout va bien / paix seulement',   e:'Jàmm rekk — bul xam xam.',          ef:'Tout va bien — ne t\'inquiète pas.', c:'voyage'},
+  // MÉDICAL
+  {w:'Feebar',         p:'[fé-bar]',            f:'Être malade / maladie',           e:'Xale bi dafa feebar.',               ef:'L\'enfant est malade.',              c:'medical'},
+  {w:'Tanq',           p:'[tang]',              f:'Fièvre / chaud',                  e:'Tanq am na ko bu dëgër.',            ef:'Il a une forte fièvre.',             c:'medical'},
+  {w:'Daw',            p:'[daw]',               f:'Faire mal / douleur',             e:'Fan la daw ?',                       ef:'Où as-tu mal ?',                     c:'medical'},
+  {w:'Soxor',          p:'[so-kor]',            f:'Vomir',                           e:'Dafa soxor juróom yoon.',            ef:'Il a vomi 5 fois.',                  c:'medical'},
+  {w:'Yàq ci biir',    p:'[yak ci biir]',       f:'Diarrhée',                        e:'Dafay yàq ci biir ci démb.',         ef:'Il avait la diarrhée hier.',         c:'medical'},
+  {w:'Noppil biscuit', p:'[nop-pil bis-KUI]',   f:'Allaiter au sein',                e:'Noppil xale bi biscuit fukk yoon.', ef:'Allaite l\'enfant 10 fois/jour.',    c:'medical'},
+  {w:'Garab',          p:'[ga-rab]',            f:'Médicament / remède',             e:'Jël garab bi ñaar yoon ci bën bés.',ef:'Prends-le 2 fois par jour.',         c:'medical'},
+  {w:'Piquer',         p:'[pi-KÉ]',             f:'Faire une piqûre / vacciner',     e:'Dinaa ko piquer ci vaccination.',    ef:'Je vais lui faire le vaccin.',       c:'medical'},
+  {w:'Àll',            p:'[all]',               f:'Déshydratation',                  e:'Xale bi dafa am àll bu xéex.',       ef:'L\'enfant est sévèrement déshydraté.',c:'medical'},
+  {w:'Lomb',           p:'[lomb]',              f:'Peser',                           e:'Dinaa ko lomb ci bàsket bi.',        ef:'Je vais le peser sur la balance.',   c:'medical'},
+  {w:'Sibiru',         p:'[si-bi-ru]',          f:'Moustique / paludisme',           e:'Sibiru moo ko japp.',                ef:'Le moustique l\'a eu (paludisme).',  c:'medical'},
+  {w:'Xarala',         p:'[kha-ra-la]',         f:'Protéger',                        e:'Vaccination bi xarala xale bi.',     ef:'Le vaccin protège l\'enfant.',       c:'medical'},
+  {w:'Bul xam xam',    p:'[bul kham kham]',     f:'Ne t\'inquiète pas',              e:'Bul xam xam, dina baax.',            ef:'Ne t\'inquiète pas, ça va aller.',   c:'medical'},
+  // AVANCÉ
+  {w:'Dëgër',          p:'[de-ger]',            f:'Fort / sévère / intense',         e:'Feebar bi dafa dëgër bu baari.',     ef:'La maladie est très sévère.',        c:'avance'},
+  {w:'Xéex',           p:'[khe-khe]',           f:'Grave / sérieux',                 e:'Sibiru bu xéex la — am danger.',     ef:'C\'est un paludisme grave.',         c:'avance'},
+  {w:'Wàllu',          p:'[wal-lu]',            f:'Situation / condition de vie',    e:'Xam naa sa wàllu — dafa dëgër.',     ef:'Je comprends ta situation difficile.',c:'avance'},
+  {w:'Nit nit mooy garabam', p:'[proverbe]',    f:'L\'homme est le remède de l\'homme', e:'Nit nit mooy garabam — wolof yi wax loolu.', ef:'Proverbe wolof fondamental.',c:'avance'},
+  {w:'Dóor',           p:'[dor]',               f:'Trembler / convulser',            e:'Xale bi amoon na ko dóor.',          ef:'L\'enfant a eu une convulsion.',     c:'avance'},
+  {w:'Raayu bi',       p:'[ra-yu bi]',          f:'La courbe (de croissance)',        e:'Xale bi yem na ci raayu bi.',        ef:'L\'enfant est sur la courbe normale.',c:'avance'},
+  {w:'Yëkk yëkk',      p:'[yekk yekk]',         f:'Normalement / de façon régulière',e:'Ndax dafa lekk yëkk yëkk ci démb ?',ef:'Mangeait-il normalement hier ?',     c:'avance'},
+  {w:'Gëm',            p:'[guem]',              f:'Croire / évaluer',                e:'Gëm naa sa wàllu.',                  ef:'J\'évalue ta situation.',            c:'avance'},
+];
+
+let known = JSON.parse(localStorage.getItem('w2_known') || '[]');
+
+function saveKnown() {
+  localStorage.setItem('w2_known', JSON.stringify(known));
+  updateProg();
+}
+function updateProg() {
+  const c = known.length, max = 300;
+  const pw = Math.min(100, Math.round(c / max * 100));
+  document.getElementById('pb-w').style.width = pw + '%';
+  document.getElementById('pv-w').textContent  = c + '/300';
+}
+
+// ── Navigation ──
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    const pg = el.dataset.page;
+    document.getElementById('page-' + pg).classList.add('active');
+    if (pg === 'vocabulaire') renderVocab('all');
+    if (pg === 'flashcards')  initFC();
+    if (pg === 'quiz')        initQuiz();
+    if (pg === 'planning')    renderPlanning();
+  });
+});
+
+// ── Vocabulary ──
+function renderVocab(filter) {
+  const con = document.getElementById('vocab-list');
+  con.innerHTML = '';
+  const groups = { quotidien:[], voyage:[], medical:[], avance:[] };
+  const labels  = { quotidien:'🏠 Quotidien', voyage:'✈️ Voyage / Humanitaire', medical:'🏥 Médical pédiatrique', avance:'⭐ Avancé & Idiomatique' };
+  let items = filter === 'unknown' ? VD.filter(w => !known.includes(w.w))
+            : filter !== 'all'    ? VD.filter(w => w.c === filter) : VD;
+  items.forEach(w => { if (groups[w.c]) groups[w.c].push(w); });
+  Object.keys(groups).forEach(cat => {
+    if (!groups[cat].length) return;
+    const hd = document.createElement('div'); hd.className = 'vcat'; hd.textContent = labels[cat];
+    con.appendChild(hd);
+    const grid = document.createElement('div'); grid.className = 'vgrid';
+    groups[cat].forEach(w => {
+      const card = document.createElement('div');
+      card.className = 'vc' + (known.includes(w.w) ? ' known' : '');
+      card.innerHTML = `<div style="flex:1">
+        <div class="vw">${w.w}</div>
+        <div class="vp">${w.p}</div>
+        <div class="vfr">${w.f}</div>
+        <div class="vex">${w.e} <em style="color:var(--mute);font-size:10px">— ${w.ef}</em></div>
+      </div><div class="vchk">${known.includes(w.w) ? '✓' : ''}</div>`;
+      card.onclick = () => {
+        const i = known.indexOf(w.w);
+        if (i === -1) { known.push(w.w); card.classList.add('known'); card.querySelector('.vchk').textContent = '✓'; }
+        else          { known.splice(i,1); card.classList.remove('known'); card.querySelector('.vchk').textContent = ''; }
+        saveKnown();
+      };
+      grid.appendChild(card);
+    });
+    con.appendChild(grid);
+  });
+}
+function fv(f, btn) {
+  document.querySelectorAll('#page-vocabulaire .fbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); renderVocab(f);
+}
+
+// ── Flashcards ──
+let fci = 0, fcf = 'all', fca = [];
+function setFCF(f, btn) {
+  document.querySelectorAll('#page-flashcards .fbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); fcf = f; initFC();
+}
+function initFC() {
+  fca = (fcf === 'all' ? [...VD] : VD.filter(w => w.c === fcf)).sort(() => Math.random() - .5);
+  fci = 0; document.getElementById('fc-scene').classList.remove('flipped'); renderFC();
+}
+function renderFC() {
+  if (!fca.length) return;
+  const w = fca[fci];
+  ['fc-cat','fc-cat-b'].forEach(id => document.getElementById(id).textContent = w.c.toUpperCase());
+  document.getElementById('fc-word').textContent = w.w;
+  document.getElementById('fc-pron').textContent = w.p;
+  document.getElementById('fc-hint').textContent = 'Wolof';
+  document.getElementById('fc-tr').textContent   = w.f;
+  document.getElementById('fc-ex').textContent   = w.e;
+  document.getElementById('fc-exfr').textContent = w.ef;
+  document.getElementById('fc-ctr').textContent  = `Carte ${fci + 1}/${fca.length}`;
+  document.getElementById('fc-scene').classList.remove('flipped');
+  const dots = document.getElementById('fc-dots'); dots.innerHTML = '';
+  const show = Math.min(12, fca.length);
+  for (let i = 0; i < show; i++) {
+    const d = document.createElement('div');
+    d.className = 'fc-dot' + (i < fci ? ' done' : i === fci ? ' curr' : '');
+    dots.appendChild(d);
+  }
+}
+function flipCard()  { document.getElementById('fc-scene').classList.toggle('flipped'); }
+function nextCard()  { if (fci < fca.length - 1) { fci++; renderFC(); } }
+function prevCard()  { if (fci > 0) { fci--; renderFC(); } }
+function rateCard(ok) {
+  if (ok && !known.includes(fca[fci].w)) { known.push(fca[fci].w); saveKnown(); }
+  nextCard();
+}
+
+// ── Grammar ──
+function tgr(id) { document.getElementById(id).classList.toggle('open'); }
+
+// ── Quiz ──
+let qi = [], qidx = 0, qsc = 0, qfilter = 'all', qans = false;
+function setQF(f, btn) {
+  document.querySelectorAll('#page-quiz .fbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); qfilter = f; initQuiz();
+}
+function initQuiz() {
+  const pool = qfilter === 'all' ? VD : VD.filter(w => w.c === qfilter);
+  qi = [...pool].sort(() => Math.random() - .5).slice(0, 15);
+  qidx = 0; qsc = 0; renderQ();
+}
+function renderQ() {
+  qans = false;
+  const w = qi[qidx];
+  document.getElementById('quiz-q').textContent   = `Que signifie en français : « ${w.w} » ?`;
+  document.getElementById('qs-n').textContent      = qidx + 1;
+  document.getElementById('qs-tot').textContent    = qi.length;
+  document.getElementById('qs-sc').textContent     = qsc;
+  document.getElementById('quiz-fb').className     = 'quiz-fb';
+  document.getElementById('quiz-nb').style.display = 'none';
+  const wrongs = VD.filter(x => x.f !== w.f).sort(() => Math.random() - .5).slice(0, 3).map(x => x.f);
+  const opts   = [...wrongs, w.f].sort(() => Math.random() - .5);
+  const con = document.getElementById('quiz-opts'); con.innerHTML = '';
+  opts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt'; btn.textContent = opt;
+    btn.onclick = () => answerQ(opt, w.f, btn, w);
+    con.appendChild(btn);
+  });
+}
+function answerQ(chosen, correct, btn, w) {
+  if (qans) return; qans = true;
+  document.querySelectorAll('.quiz-opt').forEach(b => b.classList.add('disabled'));
+  const fb = document.getElementById('quiz-fb');
+  if (chosen === correct) {
+    btn.classList.add('correct'); qsc++;
+    document.getElementById('qs-sc').textContent = qsc;
+    fb.className = 'quiz-fb ok';
+    fb.textContent = `✓ Waaw ! Correct. Exemple : ${w.e} — ${w.ef}`;
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.quiz-opt').forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
+    fb.className = 'quiz-fb bad';
+    fb.textContent = `✗ Déedéet. « ${w.w} » signifie : « ${correct} »`;
+  }
+  if (qidx < qi.length - 1) document.getElementById('quiz-nb').style.display = 'inline-block';
+  else fb.textContent += ` | Quiz terminé ! Score : ${qsc}/${qi.length}`;
+}
+function nextQ()    { qidx++; renderQ(); }
+function restartQ() { initQuiz(); }
+
+// ── Planning ──
+const DAYS  = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const DICO  = ['📐','👂','📚','💬','👶','🌍','🎵'];
+const DACT  = ['Grammaire & nombres','Écoute immersive','Vocab médical','Tandem wolof','Jeux de rôle','Culture & proverbes','Révision libre'];
+let doneD = JSON.parse(localStorage.getItem('w2_days') || '[]');
+
+function renderPlanning() {
+  const g = document.getElementById('week-grid'); g.innerHTML = '';
+  DAYS.forEach((d, i) => {
+    const c = document.createElement('div');
+    c.className = 'day-card' + (doneD.includes(i) ? ' done' : '');
+    c.innerHTML = `<div class="day-n">${d}</div><div class="day-i">${DICO[i]}</div><div class="day-a">${DACT[i]}</div>`;
+    c.onclick = () => {
+      const idx = doneD.indexOf(i);
+      if (idx === -1) doneD.push(i); else doneD.splice(idx, 1);
+      localStorage.setItem('w2_days', JSON.stringify(doneD));
+      updateDays(); renderPlanning();
+    };
+    g.appendChild(c);
+  });
+  document.getElementById('streak-n').textContent = doneD.length;
+  updateDays();
+}
+function updateDays() {
+  const p = Math.round(doneD.length / 7 * 100);
+  document.getElementById('pb-d').style.width = p + '%';
+  document.getElementById('pv-d').textContent  = doneD.length + '/7';
+}
+
+// ── Init ──
+updateProg(); initFC(); initQuiz(); renderPlanning();
+</script>
+</body>
+</html>
